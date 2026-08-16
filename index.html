@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Happy Birthday Chinniii | Varshitha Reddy 🎂✨</title>
+
+  <meta
+    name="description"
+    content="A cinematic birthday reveal, historical documentary, and personal letter experience for Varshitha Reddy (Chinniii)."
+  >
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Allura&family=Caveat:wght@500;600;700&family=Cinzel:wght@400;600;800;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+  <!-- THREE.JS WEBGL ENGINE FOR REALISTIC DEEP SPACE UNIVERSE -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <!-- THREE.JS POST-PROCESSING MODULES FOR FILM-QUALITY UNREAL BLOOM & LIGHTING -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/EffectComposer.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/RenderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/ShaderPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/CopyShader.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       BACKGROUND MUSIC
+       ===================================================== -->
+  <audio id="main-audio-player" src="music/main-song.mp3" preload="auto" loop></audio>
+  <audio id="universe-audio-player" src="music/universe-song.mp3" preload="auto" loop></audio>
+  <audio id="run-audio-player" src="music/run-song.mp3" preload="auto" loop></audio>
+  <audio id="letter-audio-player" src="music/letter-song.mp3" preload="auto" loop></audio>
+
+  <!-- FLOATING MUSIC CONTROLS (ALWAYS ACCESSIBLE) -->
+  <button id="music-toggle-btn" class="floating-music-btn" aria-label="Toggle Soundtrack">
+    <span class="music-icon" id="music-icon">🎵</span>
+    <span class="music-label" id="music-label">Music ON</span>
+  </button>
+
+  <!-- ==========================================================================
+       STAGE 1: CINEMATIC TEXT INTRO (MOVIE OPENING WITH WEDDING CALLIGRAPHY)
+       ========================================================================== -->
+
+  <section
+    id="cinematic-text-intro"
+    class="cinematic-text-intro">
+
+    <div id="intro-particles-canvas-box" class="intro-particles-canvas-box">
+      <canvas id="intro-sparkles-canvas" class="intro-sparkles-canvas"></canvas>
+    </div>
+
+    <div class="intro-text-wrapper">
+
+      <!-- SENTENCE 1 -->
+      <p
+        id="cinematic-sentence-1"
+        class="text-intro-line wedding-script">
+        <span class="wedding-text-inner">When God wants to Bless your life</span>
+      </p>
+
+      <!-- SENTENCE 2 -->
+      <p
+        id="cinematic-sentence-2"
+        class="text-intro-line wedding-script">
+        <span class="sweep-text-wrapper wedding-text-inner">He sends an August Girl into your Life..!</span> <span id="intro-heart" class="intro-heart">❤️</span>
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 2
+       ORIGINAL FRONT PAGE (REVEALED AFTER TEXT INTRO)
+       ===================================================== -->
+
+  <section
+    id="intro-curtain"
+    class="intro-curtain hidden-curtain">
+
+    <div class="intro-content">
+
+      <div class="film-clapper-icon">
+        🎬
+      </div>
+
+      <p class="intro-tagline">
+        This For Youuu Girl 💗
+      </p>
+
+      <h1 class="intro-main-title">
+        VARSHITHA REDDY
+      </h1>
+
+      <p class="intro-subtext">
+        Best experienced with Buds & audio on 🔊
+      </p>
+
+      <button
+        id="start-reveal-btn"
+        class="cinematic-play-btn">
+
+        <span class="btn-glow"></span>
+
+        <span class="btn-text">
+          ENTER THE REVEAL 👣
+        </span>
+
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 1.5
+       REALISTIC CINEMATIC CHINNIII UNIVERSE
+       ===================================================== -->
+
+  <section
+    id="cosmic-universe"
+    class="cosmic-universe-section hidden">
+
+    <!-- 3D WEBGL DEEP SPACE CANVAS -->
+    <canvas
+      id="universe-webgl-canvas"
+      class="universe-webgl-canvas">
+    </canvas>
+
+    <!-- DISCOVERY HINT BADGES OVERLAY -->
+    <div class="planet-hints-container" id="planet-hints-container">
+
+      <!-- MOON HINT -->
+      <div class="planet-hint-badge" id="hint-moon">
+        <span class="hint-pulse-ring"></span>
+        <span class="hint-text">Inka entha sepu chusthav? Click cheyyi</span>
+      </div>
+
+      <!-- VENUS HINT -->
+      <div class="planet-hint-badge hidden" id="hint-venus">
+        <span class="hint-pulse-ring"></span>
+        <span class="hint-text">✨ New message discovered</span>
+      </div>
+
+      <!-- SATURN HINT -->
+      <div class="planet-hint-badge hidden" id="hint-saturn">
+        <span class="hint-pulse-ring"></span>
+        <span class="hint-text">✨ New message discovered</span>
+      </div>
+
+      <!-- SUN HINT -->
+      <div class="planet-hint-badge hidden" id="hint-sun">
+        <span class="hint-pulse-ring"></span>
+        <span class="hint-text">✨ New message discovered</span>
+      </div>
+
+    </div>
+
+    <!-- CINEMATIC MESSAGE OVERLAY MODAL -->
+    <div class="universe-message-modal hidden" id="universe-message-modal">
+      <div class="universe-modal-backdrop"></div>
+      
+      <div class="universe-modal-content">
+        <div class="univ-label" id="univ-label"></div>
+
+        <div class="universe-lines-wrapper" id="universe-lines-wrapper">
+          <p class="univ-line" id="univ-line-1"></p>
+          <p class="univ-line" id="univ-line-2"></p>
+          <p class="univ-line" id="univ-line-3"></p>
+          <p class="univ-line" id="univ-line-4"></p>
+        </div>
+
+        <button id="universe-action-btn" class="universe-action-btn hidden">
+          <span class="btn-shine"></span>
+          <span class="btn-text" id="univ-btn-text">CONTINUE JOURNEY →</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 1.8
+       CHINNIII WORLD — THE FINAL LITTLE WORLD MADE FOR YOU
+       ===================================================== -->
+
+  <section id="chinniii-world-section" class="chinniii-world-section hidden">
+
+    <!-- EDITORIAL BACKGROUND LAYERS -->
+    <div class="cw-paper-grain"></div>
+    <div class="cw-ambient-blob blob-gold"></div>
+    <div class="cw-ambient-blob blob-pink"></div>
+    <div class="cw-ambient-blob blob-lavender"></div>
+    <canvas id="cw-dust-canvas" class="cw-dust-canvas"></canvas>
+
+    <!-- HERO EDITORIAL HEADER -->
+    <header class="cw-hero-header">
+      <div class="cw-hero-eyebrow-wrapper">
+        <span class="cw-pill-tag">CHINNIII WORLD / FINAL CHAPTER</span>
+        <span class="cw-sub-eyebrow">THE FINAL LITTLE WORLD MADE FOR YOU</span>
+      </div>
+
+      <h1 class="cw-main-title">
+        <span class="title-line-1">FOUR MOMENTS.</span>
+        <span class="title-line-2">FOUR LITTLE SURPRISES.</span>
+      </h1>
+
+      <p class="cw-supporting-text">
+        Set the time. Discover the story.
+      </p>
+
+      <p class="cw-alt-subtext">
+        "Some moments are better when you wait for them."
+      </p>
+
+      <div class="cw-instruction-chip">
+        <span class="chip-dot"></span>
+        <span>Choose a clock. Set an alarm. Let it reveal itself.</span>
+      </div>
+    </header>
+
+    <!-- ASYMMETRIC 4-CLOCK EXHIBITION CANVAS -->
+    <div class="cw-exhibition-container" id="cw-exhibition-container">
+
+      <!-- CLOCK 01 OBJECT (Large Hero, Left) -->
+      <article class="cw-clock-card clock-card-1" id="clock-card-1" data-clock="1">
+        <div class="card-inner-glass">
+          <div class="card-glass-sweep"></div>
+          
+          <div class="clock-card-header">
+            <span class="clock-index">01</span>
+            <span class="clock-type-tag">01 / MESSAGE</span>
+            <span class="clock-status-pill status-ready" id="status-pill-1">READY</span>
+          </div>
+
+          <!-- ANALOG CLOCK OBJECT -->
+          <div class="analog-clock-wrapper">
+            <div class="analog-clock-face" id="analog-clock-1">
+              <div class="clock-center-cap"></div>
+              <div class="clock-hand hand-hour" id="hand-hour-1"></div>
+              <div class="clock-hand hand-minute" id="hand-minute-1"></div>
+              <div class="clock-hand hand-second" id="hand-second-1"></div>
+              <!-- Dial Markers -->
+              <span class="clock-marker marker-12">12</span>
+              <span class="clock-marker marker-3">3</span>
+              <span class="clock-marker marker-6">6</span>
+              <span class="clock-marker marker-9">9</span>
+            </div>
+          </div>
+
+          <!-- DIGITAL TIME & LABEL -->
+          <div class="clock-digital-readout">
+            <span class="digital-time-val" id="digital-time-1">07:30 PM</span>
+            <span class="digital-alarm-badge hidden" id="alarm-badge-1">ALARM SET</span>
+          </div>
+
+          <div class="clock-card-footer">
+            <h2 class="clock-label">WAKE UP TO SOMETHING</h2>
+            <p class="clock-hint">Click to set appointment</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- CLOCK 02 OBJECT (Smaller Tilted, Upper Right) -->
+      <article class="cw-clock-card clock-card-2" id="clock-card-2" data-clock="2">
+        <div class="card-inner-glass">
+          <div class="card-glass-sweep"></div>
+
+          <div class="clock-card-header">
+            <span class="clock-index">02</span>
+            <span class="clock-type-tag">02 / MEMORY</span>
+            <span class="clock-status-pill status-waiting" id="status-pill-2">WAITING</span>
+          </div>
+
+          <div class="analog-clock-wrapper">
+            <div class="analog-clock-face" id="analog-clock-2">
+              <div class="clock-center-cap"></div>
+              <div class="clock-hand hand-hour" id="hand-hour-2"></div>
+              <div class="clock-hand hand-minute" id="hand-minute-2"></div>
+              <div class="clock-hand hand-second" id="hand-second-2"></div>
+              <span class="clock-marker marker-12">12</span>
+              <span class="clock-marker marker-3">3</span>
+              <span class="clock-marker marker-6">6</span>
+              <span class="clock-marker marker-9">9</span>
+            </div>
+          </div>
+
+          <div class="clock-digital-readout">
+            <span class="digital-time-val" id="digital-time-2">08:00 PM</span>
+            <span class="digital-alarm-badge hidden" id="alarm-badge-2">ALARM SET</span>
+          </div>
+
+          <div class="clock-card-footer">
+            <h2 class="clock-label">A MEMORY</h2>
+            <p class="clock-hint">Some moments deserve to stay</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- CLOCK 03 OBJECT (Large, Lower Middle) -->
+      <article class="cw-clock-card clock-card-3" id="clock-card-3" data-clock="3">
+        <div class="card-inner-glass">
+          <div class="card-glass-sweep"></div>
+
+          <div class="clock-card-header">
+            <span class="clock-index">03</span>
+            <span class="clock-type-tag">03 / BLESSING</span>
+            <span class="clock-status-pill status-peace" id="status-pill-3">PEACE</span>
+          </div>
+
+          <div class="analog-clock-wrapper">
+            <div class="analog-clock-face" id="analog-clock-3">
+              <div class="clock-center-cap"></div>
+              <div class="clock-hand hand-hour" id="hand-hour-3"></div>
+              <div class="clock-hand hand-minute" id="hand-minute-3"></div>
+              <div class="clock-hand hand-second" id="hand-second-3"></div>
+              <span class="clock-marker marker-12">12</span>
+              <span class="clock-marker marker-3">3</span>
+              <span class="clock-marker marker-6">6</span>
+              <span class="clock-marker marker-9">9</span>
+            </div>
+          </div>
+
+          <div class="clock-digital-readout">
+            <span class="digital-time-val" id="digital-time-3">09:15 PM</span>
+            <span class="digital-alarm-badge hidden" id="alarm-badge-3">ALARM SET</span>
+          </div>
+
+          <div class="clock-card-footer">
+            <h2 class="clock-label">A BLESSING</h2>
+            <p class="clock-hint">A spiritual chapter</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- CLOCK 04 OBJECT (Smaller Tilted, Lower Right) -->
+      <article class="cw-clock-card clock-card-4" id="clock-card-4" data-clock="4">
+        <div class="card-inner-glass">
+          <div class="card-glass-sweep"></div>
+
+          <div class="clock-card-header">
+            <span class="clock-index">04</span>
+            <span class="clock-type-tag">04 / WISH</span>
+            <span class="clock-status-pill status-final" id="status-pill-4">FINAL</span>
+          </div>
+
+          <div class="analog-clock-wrapper">
+            <div class="analog-clock-face" id="analog-clock-4">
+              <div class="clock-center-cap"></div>
+              <div class="clock-hand hand-hour" id="hand-hour-4"></div>
+              <div class="clock-hand hand-minute" id="hand-minute-4"></div>
+              <div class="clock-hand hand-second" id="hand-second-4"></div>
+              <span class="clock-marker marker-12">12</span>
+              <span class="clock-marker marker-3">3</span>
+              <span class="clock-marker marker-6">6</span>
+              <span class="clock-marker marker-9">9</span>
+            </div>
+          </div>
+
+          <div class="clock-digital-readout">
+            <span class="digital-time-val" id="digital-time-4">11:59 PM</span>
+            <span class="digital-alarm-badge hidden" id="alarm-badge-4">ALARM SET</span>
+          </div>
+
+          <div class="clock-card-footer">
+            <h2 class="clock-label">ONE LAST THING</h2>
+            <p class="clock-hint">The emotional ending</p>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <!-- GLOBAL REPLAY / NAVIGATION FOOTER BAR -->
+    <div class="cw-footer-actions">
+      <button id="cw-replay-btn" class="cw-footer-btn">
+        <span class="btn-icon">↻</span>
+        <span>REPLAY THE WORLD</span>
+      </button>
+
+      <button id="cw-continue-chronicle-btn" class="cw-footer-btn btn-primary-gold">
+        <span>CONTINUE TO PERSONAL LETTER 💌</span>
+        <span class="btn-icon">→</span>
+      </button>
+    </div>
+
+    <!-- =====================================================
+         ALARM SETTING INTERFACE MODAL
+         ===================================================== -->
+    <div class="cw-modal-backdrop hidden" id="cw-alarm-modal">
+      <div class="cw-modal-card alarm-modal-card">
+        <button class="cw-back-to-world-btn cw-exit-trigger" aria-label="Back to Chinniii World">
+          <span class="back-arrow">←</span>
+          <span class="back-text">BACK TO CHINNIII WORLD</span>
+        </button>
+        <button class="cw-modal-close" id="alarm-modal-close" aria-label="Close">✕</button>
+        
+        <div class="alarm-header">
+          <span class="alarm-eyebrow" id="alarm-clock-name">CLOCK 01</span>
+          <h2 class="alarm-title" id="alarm-title-text">SET AN ALARM FOR CHINNIII</h2>
+          <p class="alarm-subtitle">WHAT TIME SHOULD THE SURPRISE WAKE UP?</p>
+        </div>
+
+        <!-- LUXURY DIGITAL TIME PICKER -->
+        <div class="luxury-time-picker">
+          <div class="time-column">
+            <button class="time-arrow arrow-up" id="hour-up">▲</button>
+            <span class="time-display-num" id="picker-hour">07</span>
+            <button class="time-arrow arrow-down" id="hour-down">▼</button>
+          </div>
+
+          <span class="time-colon">:</span>
+
+          <div class="time-column">
+            <button class="time-arrow arrow-up" id="min-up">▲</button>
+            <span class="time-display-num" id="picker-min">30</span>
+            <button class="time-arrow arrow-down" id="min-down">▼</button>
+          </div>
+
+          <div class="ampm-toggle-box">
+            <button class="ampm-btn active" id="ampm-am">AM</button>
+            <button class="ampm-btn" id="ampm-pm">PM</button>
+          </div>
+        </div>
+
+        <div class="alarm-action-box">
+          <button class="cw-gold-submit-btn" id="set-alarm-confirm-btn">
+            <span class="btn-shine"></span>
+            <span>SET ALARM</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         FUNNY EDITORIAL CONVERSATION MODAL (CLOCK 1)
+         ===================================================== -->
+    <div class="cw-modal-backdrop hidden" id="cw-funny-modal">
+      <div class="cw-modal-card dialogue-modal-card">
+        <button class="cw-back-to-world-btn cw-exit-trigger" aria-label="Back to Chinniii World">
+          <span class="back-arrow">←</span>
+          <span class="back-text">BACK TO CHINNIII WORLD</span>
+        </button>
+        <button class="cw-modal-close" id="funny-modal-close" aria-label="Close">✕</button>
+
+        <div class="dialogue-header">
+          <span class="dialogue-badge">ALARM CONFIRMATION</span>
+        </div>
+
+        <div class="editorial-dialogue-container" id="editorial-dialogue-container">
+          <!-- Lines dynamically populated via JS with stagger effect -->
+        </div>
+
+        <div class="alarm-scheduled-summary hidden" id="alarm-scheduled-summary">
+          <div class="alarm-success-ring"></div>
+          <span class="alarm-status-label">ALARM SET</span>
+          <h3 class="alarm-time-confirmed" id="confirmed-alarm-time">07:30 PM</h3>
+          <p class="alarm-waiting-msg">Something will be waiting for you.</p>
+
+          <button class="cw-gold-submit-btn" id="reveal-music-player-btn">
+            <span>PROCEED TO YOUR SOUNDTRACK →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         ORIGINAL PREMIUM MUSIC PLAYER MODAL (CLOCK 1)
+         ===================================================== -->
+    <div class="cw-modal-backdrop hidden" id="cw-music-modal">
+      <div class="cw-modal-card music-modal-card">
+        <button class="cw-back-to-world-btn cw-exit-trigger" aria-label="Back to Chinniii World">
+          <span class="back-arrow">←</span>
+          <span class="back-text">BACK TO CHINNIII WORLD</span>
+        </button>
+        <button class="cw-modal-close" id="music-modal-close" aria-label="Close">✕</button>
+
+        <div class="music-player-header">
+          <span class="player-tag">YOUR LITTLE SOUNDTRACK</span>
+          <span class="player-status-dot">● ACTIVE</span>
+        </div>
+
+        <div class="player-body">
+          <!-- VINYL / ALBUM ART -->
+          <div class="album-art-wrapper">
+            <div class="album-art-disc" id="album-art-disc">
+              <div class="vinyl-grooves"></div>
+              <div class="vinyl-center-art">
+                <span>🎵</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- TRACK INFO -->
+          <div class="track-info-block">
+            <h3 class="track-title" id="cw-track-title">Chinniii Special</h3>
+            <p class="track-artist" id="cw-track-artist">Birthday Edition</p>
+          </div>
+
+          <!-- PROGRESS BAR -->
+          <div class="track-progress-container">
+            <span class="time-curr" id="track-time-curr">0:00</span>
+            <div class="progress-bar-track" id="cw-progress-bar">
+              <div class="progress-bar-fill" id="cw-progress-fill"></div>
+            </div>
+            <span class="time-dur" id="track-time-dur">3:45</span>
+          </div>
+
+          <!-- CONTROLS -->
+          <div class="player-controls">
+            <button class="player-btn btn-heart" id="music-heart-btn" aria-label="Favorite">♡</button>
+            <button class="player-btn btn-prev" id="music-prev-btn" aria-label="Previous">‹</button>
+            <button class="player-btn btn-play-main" id="music-play-btn" aria-label="Play/Pause">▶</button>
+            <button class="player-btn btn-next" id="music-next-btn" aria-label="Next">›</button>
+            <button class="player-btn btn-change-song" id="music-change-track-btn">CHANGE SONG</button>
+          </div>
+        </div>
+
+        <!-- TRACK SELECTOR DROPDOWN MODAL -->
+        <div class="track-selector-overlay hidden" id="track-selector-overlay">
+          <h4 class="selector-title">SELECT SOUNDTRACK</h4>
+          <div class="track-list">
+            <button class="track-option active" data-track="01" data-file="music/chinni-special.mp3">
+              <span class="t-num">01</span>
+              <span class="t-name">Chinniii Special</span>
+            </button>
+            <button class="track-option" data-track="02" data-file="music/birthday-mood.mp3">
+              <span class="t-num">02</span>
+              <span class="t-name">Birthday Mood</span>
+            </button>
+            <button class="track-option" data-track="03" data-file="music/good-vibes.mp3">
+              <span class="t-num">03</span>
+              <span class="t-name">Good Vibes</span>
+            </button>
+            <button class="track-option" data-track="04" data-file="music/letter-song.mp3">
+              <span class="t-num">04</span>
+              <span class="t-name">One More Song</span>
+            </button>
+          </div>
+          <button class="cw-sm-btn" id="close-track-selector-btn">DONE</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         CLOCK 02 — IMAGE MEMORY REVEAL MODAL
+         ===================================================== -->
+    <div class="cw-modal-backdrop hidden" id="cw-memory-modal">
+      <div class="cw-modal-card memory-modal-card">
+        <button class="cw-back-to-world-btn cw-exit-trigger" aria-label="Back to Chinniii World">
+          <span class="back-arrow">←</span>
+          <span class="back-text">BACK TO CHINNIII WORLD</span>
+        </button>
+        <button class="cw-modal-close" id="memory-modal-close" aria-label="Close">✕</button>
+
+        <div class="memory-narrative-header">
+          <span class="memory-meta-tag">MEMORY / CHINNIII</span>
+          <p class="memory-lead-line" id="mem-line-1">"Some memories don't need a reason to make us smile."</p>
+          <p class="memory-sub-line" id="mem-line-2">"This one just feels like you. ❤️"</p>
+        </div>
+
+        <!-- MUSEUM-GRADE PHOTO PRESENTATION -->
+        <div class="museum-photo-frame">
+          <div class="film-grain-overlay-sm"></div>
+          <img src="images/clock-memory.jpg" alt="Chinniii Memory" id="cw-memory-img" class="museum-img">
+          <div class="museum-light-sweep"></div>
+        </div>
+
+        <div class="memory-footer">
+          <span class="museum-caption">CHAPTER 02 • A MOMENT PRESERVED</span>
+          <button class="cw-gold-submit-btn" id="finish-clock-2-btn">CONTINUE TO BLESSING →</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         CLOCK 03 — LORD SHIVA BLESSING ATMOSPHERE MODAL
+         ===================================================== -->
+    <div class="cw-modal-backdrop shiva-theme-backdrop hidden" id="cw-shiva-modal">
+      <div class="cw-modal-card shiva-modal-card">
+        <button class="cw-back-to-world-btn cw-exit-trigger text-light" aria-label="Back to Chinniii World">
+          <span class="back-arrow">←</span>
+          <span class="back-text">BACK TO CHINNIII WORLD</span>
+        </button>
+        <button class="cw-modal-close shiva-close" id="shiva-modal-close" aria-label="Close">✕</button>
+
+        <!-- SACRED GODLY ATMOSPHERE BACKGROUND -->
+        <div class="shiva-incense-haze"></div>
+        <div class="shiva-golden-halo"></div>
+
+        <div class="shiva-hero-artwork-box">
+          <img src="images/lord-shiva.jpg" alt="Lord Shiva Mahadev" class="shiva-artwork-img" id="shiva-img">
+          <div class="shiva-rays-sweep"></div>
+        </div>
+
+        <div class="shiva-narrative-block">
+          <span class="shiva-chapter-tag">03 / A BLESSING • MAHADEV</span>
+          
+          <p class="shiva-line" id="shiva-line-1">"May Mahadev always watch over you."</p>
+          <p class="shiva-line" id="shiva-line-2">"May you have the strength to face every difficult day."</p>
+          <p class="shiva-line" id="shiva-line-3">"May your path be filled with peace, courage and happiness."</p>
+          <p class="shiva-line" id="shiva-line-4">"May every new beginning bring you closer to the life you dream of."</p>
+          <p class="shiva-final-om" id="shiva-line-5">Har Har Mahadev. 🕉️</p>
+        </div>
+
+        <div class="shiva-action-footer">
+          <button class="cw-shiva-submit-btn" id="finish-clock-3-btn">
+            <span>PROCEED TO FINAL CHAPTER →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- =====================================================
+         CLOCK 04 — FINAL BIRTHDAY EMOTIONAL FINALE MODAL
+         ===================================================== -->
+    <div class="cw-modal-backdrop finale-theme-backdrop hidden" id="cw-finale-modal">
+      <canvas id="cw-fireworks-canvas" class="cw-fireworks-canvas"></canvas>
+      
+      <div class="cw-modal-card finale-modal-card">
+        <button class="cw-back-to-world-btn cw-exit-trigger text-light" aria-label="Back to Chinniii World">
+          <span class="back-arrow">←</span>
+          <span class="back-text">BACK TO CHINNIII WORLD</span>
+        </button>
+        <button class="cw-modal-close" id="finale-modal-close" aria-label="Close">✕</button>
+
+        <div class="finale-spotlight-beam"></div>
+
+        <div class="finale-narrative-container">
+          <span class="finale-meta-tag">CLOCK 04 / FINAL CHAPTER</span>
+
+          <p class="finale-line" id="fin-line-1">"Before this little world closes..."</p>
+          <p class="finale-line" id="fin-line-2">"...there's just one thing left to say."</p>
+          <p class="finale-line" id="fin-line-3">"Once again..."</p>
+          <h2 class="finale-hero-heading" id="fin-line-4">HAPPY BIRTHDAY, VARSHIII. ❤️</h2>
+          
+          <div class="finale-wishes-group" id="fin-wishes-group">
+            <p class="wish-item">"May this year be kinder to you."</p>
+            <p class="wish-item">"May it bring you happiness, peace, success and beautiful memories."</p>
+            <p class="wish-item highlight-pink">"Stay happy."</p>
+            <p class="wish-item highlight-pink">"Stay crazy."</p>
+            <p class="wish-item highlight-pink">"Keep being you."</p>
+          </div>
+
+          <h1 class="finale-grand-title" id="fin-line-5">Happy Birthday, Chinniii. 🎂❤️</h1>
+        </div>
+
+        <!-- REALISTIC EDITORIAL BIRTHDAY CAKE OBJECT -->
+        <div class="editorial-cake-container hidden" id="editorial-cake-container">
+          <div class="cake-glow-halo"></div>
+          <div class="editorial-cake-object">
+            <div class="cake-candles-row">
+              <div class="editorial-candle"><span class="flame"></span></div>
+              <div class="editorial-candle"><span class="flame"></span></div>
+              <div class="editorial-candle"><span class="flame"></span></div>
+            </div>
+            <div class="cake-top-frosting">
+              <span class="cake-name-inscription">VARSHIII</span>
+            </div>
+            <div class="cake-tier tier-top"></div>
+            <div class="cake-tier tier-base"></div>
+          </div>
+        </div>
+
+        <div class="finale-navigation-row">
+          <button id="finale-replay-moment-btn" class="cw-footer-btn">
+            <span>REPLAY THIS MOMENT ↻</span>
+          </button>
+
+          <button id="finale-replay-btn" class="cw-footer-btn">
+            <span>REPLAY THE WORLD ↻</span>
+          </button>
+
+          <button id="finale-chronicle-btn" class="cw-footer-btn btn-primary-gold">
+            <span>CONTINUE TO PERSONAL LETTER 💌 →</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 2
+       BLACK CURTAIN
+       ===================================================== -->
+
+  <div
+    id="black-curtain"
+    class="black-curtain"
+    aria-hidden="true">
+  </div>
+
+
+  <!-- =====================================================
+       STAGE 5
+       THE DAY HISTORY CHANGED (CINEMATIC ORIGIN)
+       ===================================================== -->
+
+  <section
+    id="history-changed-section"
+    class="history-changed-section hidden">
+
+    <!-- ATMOSPHERIC FILM GRAIN & SPOTLIGHT BEAM -->
+    <div class="doc-film-grain"></div>
+    <div class="spotlight-beam" id="history-spotlight-beam" aria-hidden="true"></div>
+
+    <!-- =================================================
+         CINEMATIC ORIGIN STORY CONTENT
+         ================================================= -->
+    <div class="history-opening-container">
+      <div class="history-opening-content">
+
+        <!-- CHAPTER EYEBROW -->
+        <div class="doc-chapter-tag" id="hist-chapter-tag">
+          CHAPTER I • THE ORIGIN
+        </div>
+
+        <!-- HERO DATE -->
+        <h2 class="hist-hero-date" id="hist-step-1">
+          24 August 2004
+        </h2>
+
+        <!-- NARRATIVE LINES -->
+        <p class="hist-narrative-line" id="hist-step-2">
+          Twenty-two years ago...
+        </p>
+
+        <p class="hist-narrative-line" id="hist-step-3">
+          On an ordinary day...
+        </p>
+
+        <p class="hist-narrative-line" id="hist-step-4">
+          ...something extraordinary happened.
+        </p>
+
+        <!-- SUSPENSE BUILDUP -->
+        <div class="hist-suspense-block">
+          <p class="hist-suspense-line" id="hist-step-suspense-1">
+            Nobody knew...
+          </p>
+          <p class="hist-suspense-line" id="hist-step-suspense-2">
+            the world was about to get a little more chaotic.
+          </p>
+          <p class="hist-suspense-line highlight-accent" id="hist-step-suspense-3">
+            Because someone special had arrived. ✨
+          </p>
+        </div>
+
+        <!-- HERO BIRTH & NAME REVEAL -->
+        <div class="hist-birth-reveal-box">
+          <h3 class="hist-birth-heading" id="hist-step-5">
+            A GIRL WAS BORN.
+          </h3>
+
+          <h1 class="hist-hero-name" id="hist-step-6">
+            VARSHITHA REDDY
+            <span class="name-sub">aka CHINNIII ❤️</span>
+          </h1>
+        </div>
+
+        <!-- SINGLE BIRTHDAY TRANSITION CTA -->
+        <div class="history-cta-wrapper" id="hist-cta-wrapper">
+          <button
+            id="history-continue-btn"
+            class="continue-btn btn-gold-large">
+            <span class="btn-shine"></span>
+            <span class="btn-text">CONTINUE TO HER BIRTHDAY → 🎂</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 3.5
+       CHINNIII RUN 🎮🎂 — CINEMATIC INTERACTIVE RUNNER
+       ===================================================== -->
+
+  <!-- =====================================================
+       STAGE 3.5
+       CHINNIII RUN 🎮🎂 — CINEMATIC 3D RUNNING WORLD
+       ===================================================== -->
+
+  <section id="chinniii-run-section" class="chinniii-run-section hidden">
+
+    <!-- 1. FULLSCREEN 100vw x 100vh WebGL 3D GAME WORLD -->
+    <div id="run-game-viewport" class="run-game-viewport">
+      <canvas id="run-game-canvas" class="run-game-canvas"></canvas>
+
+      <!-- IN-WORLD CINEMATIC COUNTDOWN OVERLAY -->
+      <div id="run-countdown-overlay" class="run-countdown-overlay hidden">
+        <div class="countdown-content">
+          <p class="ready-title">Ready, Chinniii?</p>
+          <div id="countdown-number" class="countdown-number">3</div>
+        </div>
+      </div>
+
+      <!-- MINIMAL CINEMATIC GLASS HUD -->
+      <div id="run-hud-overlay" class="run-hud-overlay">
+        <div class="hud-chip">
+          <span class="hud-label">DISTANCE</span>
+          <span class="hud-val" id="hud-distance">0000 m</span>
+        </div>
+        <div class="hud-chip">
+          <span class="hud-label">CAKES</span>
+          <span class="hud-val" id="hud-cakes">0</span>
+        </div>
+        <div class="hud-chip">
+          <span class="hud-label">GIFTS</span>
+          <span class="hud-val" id="hud-gifts">0</span>
+        </div>
+        <div class="hud-chip">
+          <span class="hud-label">MEMORIES</span>
+          <span class="hud-val" id="hud-hearts">0</span>
+        </div>
+        <div class="hud-chip">
+          <span class="hud-label">CHAOS</span>
+          <span class="hud-val" id="hud-chaos">0</span>
+        </div>
+      </div>
+
+      <!-- TOAST NOTIFICATION -->
+      <div id="run-toast-msg" class="run-toast-msg hidden"></div>
+
+      <!-- DISTANCE BANNER -->
+      <div id="run-distance-banner" class="run-distance-banner hidden"></div>
+    </div>
+
+    <!-- 4. RUN COMPLETE SUMMARY MODAL -->
+    <div id="run-complete-modal" class="run-complete-modal hidden">
+      <div class="run-modal-backdrop"></div>
+      <div class="run-modal-content">
+
+        <div class="run-modal-header">
+          <span class="run-badge-gold">MISSION ACCOMPLISHED</span>
+          <h2 class="run-modal-title">CHINNIII RUN</h2>
+          <p class="run-modal-sub">RUN COMPLETE • 2,026 m</p>
+        </div>
+
+        <div class="run-stats-grid">
+          <div class="stat-card">
+            <span class="stat-icon">🎂</span>
+            <span class="stat-name">Birthday Cakes</span>
+            <span class="stat-count" id="final-cakes">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🎁</span>
+            <span class="stat-name">Gifts Found</span>
+            <span class="stat-count" id="final-gifts">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">❤️</span>
+            <span class="stat-name">Special Memories</span>
+            <span class="stat-count" id="final-hearts">0</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">🎵</span>
+            <span class="stat-name">Good Vibes</span>
+            <span class="stat-count">∞</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-icon">💀</span>
+            <span class="stat-name">Chaos Level</span>
+            <span class="stat-count">MAXIMUM 😂</span>
+          </div>
+          <div class="stat-card gold-result">
+            <span class="stat-icon">👑</span>
+            <span class="stat-name">Final Result</span>
+            <span class="stat-count">LEGENDARY</span>
+          </div>
+        </div>
+
+        <div class="run-personal-message-box">
+          <h4 class="run-msg-lead">"YOU MADE IT."</h4>
+          <p class="run-msg-body">You came looking for a game... But somehow, you found your birthday surprise. 😂❤️</p>
+          <p class="run-msg-personal">
+            Of course you made it. You're Chinniii.<br>
+            Running through life, collecting memories, causing chaos, and somehow making everything more fun. ❤️<br>
+            <strong>HAPPY BIRTHDAY, CHINNIII 🎂❤️</strong>
+          </p>
+        </div>
+
+        <div class="run-achievement-badge">
+          🏆 Achievement Unlocked: PROFESSIONAL SUBWAY SURFER IRL 🏃‍♀️😂 (Birthday Edition)
+        </div>
+
+        <button id="run-continue-btn" class="run-continue-btn">
+          <span class="btn-shine"></span>
+          <span class="btn-text">CONTINUE THE SURPRISE →</span>
+        </button>
+
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 4
+       MAIN CINEMATIC BIRTHDAY REVEAL
+       ===================================================== -->
+
+  <!-- =====================================================
+       STAGE 4
+       MAIN CINEMATIC BIRTHDAY REVEAL (FIREWORKS HERO)
+       ===================================================== -->
+
+  <main id="birthday-reveal" class="birthday-reveal hidden">
+
+    <!-- 1. FULLSCREEN REAL FIREWORKS VIDEO BACKGROUND -->
+    <video
+      id="birthday-fireworks-video"
+      class="birthday-fireworks-video"
+      autoplay
+      muted
+      loop
+      playsinline>
+      <source src="videos/fireworks.mp4" type="video/mp4">
+    </video>
+
+    <!-- 2. CINEMATIC OVERLAYS FOR CONTRAST & DEPTH -->
+    <div class="fireworks-dark-overlay" aria-hidden="true"></div>
+    <div class="vignette-overlay" aria-hidden="true"></div>
+    <div class="spotlight-beam" id="spotlight-beam" aria-hidden="true"></div>
+    <div class="lens-flare-sweep" id="lens-flare-sweep" aria-hidden="true"></div>
+
+    <!-- PARTICLES -->
+    <canvas id="particles-canvas" class="particles-canvas"></canvas>
+
+    <!-- =================================================
+         3. CINEMATIC LUXURY TYPOGRAPHY REVEAL
+         ================================================= -->
+    <div class="text-reveal-container">
+      <div class="text-content">
+
+        <!-- STEP 1: TAGLINE -->
+        <p class="reveal-tagline" id="text-step-1">
+          🎂 TODAY IS YOUR DAY
+        </p>
+
+        <!-- STEP 2: MAIN BIRTHDAY HEADING -->
+        <h1 class="reveal-heading" id="text-step-2">
+          HAPPY BIRTHDAY
+        </h1>
+
+        <!-- STEP 3: HERO EMOTIONAL NAME (VARSHIII ❤️) -->
+        <h2 class="reveal-hero-name" id="text-step-3">
+          VARSHIII <span class="heart-symbol">❤️</span>
+        </h2>
+
+        <!-- STEP 4: FULLNAME SUBTITLE -->
+        <p class="reveal-fullname" id="text-step-4">
+          VARSHITHA REDDY ✨
+        </p>
+
+      </div>
+
+      <!-- ROAST & NEXT BUTTON CTA CONTAINER -->
+      <div class="roast-transition-container" id="roast-cta-wrapper">
+        <button id="roast-transition-btn" class="roast-btn">
+          <span class="roast-btn-shine"></span>
+          <span class="roast-btn-text">NOW LET THE ROAST BEGIN 😂</span>
+        </button>
+        <button id="birthday-next-btn" class="birthday-next-btn">
+          <span class="birthday-next-icon">→</span>
+          <span class="birthday-next-label">THE CHINNIII ARCHIVES</span>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- =====================================================
+       STAGE 7: THE CHINNIII ARCHIVES
+       CONTINUOUS SCROLLABLE MASTER CHAPTER:
+       PART 01: THE PERSON BEHIND THE LEGEND
+       PART 02: THE LEGENDARY TIMELINE
+       PART 03: THE MEMORIES & PHOTO ALBUM
+       ===================================================== -->
+
+  <section id="roast-zone" class="roast-zone archives-master-section hidden">
+    
+    <!-- MASTER HEADER: THE CHINNIII ARCHIVES -->
+    <div class="archives-master-header">
+      <span class="archives-eyebrow">CHINNIII ARCHIVES • 2004 — PRESENT</span>
+      <h1 class="archives-main-title">
+        THE PERSON<br>
+        BEHIND THE<br>
+        <span class="title-gold-glow">LEGEND</span>
+      </h1>
+      <p class="archives-subtitle">"A little bit of chaos, a whole lot of heart." ❤️</p>
+    </div>
+
+    <!-- PART 01: THE PERSON BEHIND THE LEGEND -->
+    <div class="archives-part part-01-personality">
+      <div class="part-header-badge">
+        <span class="part-num">PART 01</span>
+        <span class="part-title">THE PERSON BEHIND THE LEGEND</span>
+      </div>
+
+      <!-- EDITORIAL ASYMMETRIC TRAIT COMPOSITION -->
+      <div class="personality-editorial-grid">
+        <div class="trait-card trait-card-1 trait-hero">
+          <span class="trait-icon">😂</span>
+          <span class="trait-label">CERTIFIED</span>
+          <h3 class="trait-title">FUNNY GIRL</h3>
+        </div>
+
+        <div class="trait-card trait-card-2 trait-offset-right">
+          <span class="trait-icon">🧠</span>
+          <span class="trait-label">PROFESSIONAL</span>
+          <h3 class="trait-title">OVERTHINKER</h3>
+        </div>
+
+        <div class="trait-card trait-card-3 trait-offset-left">
+          <span class="trait-icon">📱</span>
+          <span class="trait-label">EXPERT</span>
+          <h3 class="trait-title">MEME SPECIALIST</h3>
+        </div>
+
+        <div class="trait-card trait-card-4">
+          <span class="trait-icon">🎵</span>
+          <span class="trait-label">PASSIONATE</span>
+          <h3 class="trait-title">MUSIC LOVER</h3>
+        </div>
+
+        <div class="trait-card trait-card-5">
+          <span class="trait-icon">🕉️</span>
+          <span class="trait-label">DEVOTED</span>
+          <h3 class="trait-title">MAHADEV BHAKT</h3>
+        </div>
+
+        <div class="trait-card trait-card-6 trait-wide">
+          <span class="trait-icon">❤️</span>
+          <span class="trait-label">PROFESSIONAL</span>
+          <h3 class="trait-title">VIBE-MATCH FRIEND</h3>
+        </div>
+      </div>
+
+      <div class="personality-narrative-line">
+        <p class="personality-quote">"Basically... a little bit of everything. 😂"</p>
+        <p class="personality-highlight">And somehow, she makes it all work. ✨</p>
+      </div>
+    </div>
+
+    <!-- PART 02: THE LEGENDARY TIMELINE -->
+    <div class="archives-part part-02-timeline">
+      <div class="part-header-badge">
+        <span class="part-num">PART 02</span>
+        <span class="part-title">📜 THE LEGENDARY TIMELINE</span>
+      </div>
+      <p class="timeline-subtitle-text">A few milestones from the chaos...</p>
+
+      <!-- EDITORIAL EPISODE TIMELINE COMPOSITION -->
+      <div class="editorial-timeline-container">
+        <div class="timeline-central-gold-line"></div>
+
+        <div class="episode-card episode-left">
+          <div class="episode-marker"><span class="marker-dot"></span><span class="marker-year">2004</span></div>
+          <div class="episode-content">
+            <span class="episode-badge">EPISODE 01</span>
+            <h3 class="episode-title">The story begins. 👶</h3>
+            <p class="episode-desc">A girl was born on 24 August 2004. The world was unprepared.</p>
+          </div>
+        </div>
+
+        <div class="episode-card episode-right">
+          <div class="episode-marker"><span class="marker-dot"></span><span class="marker-year">2010</span></div>
+          <div class="episode-content">
+            <span class="episode-badge">EPISODE 02</span>
+            <h3 class="episode-title">Comedy.exe quietly installed.</h3>
+            <p class="episode-desc">Random jokes and witty responses unlocked.</p>
+          </div>
+        </div>
+
+        <div class="episode-card episode-left">
+          <div class="episode-marker"><span class="marker-dot"></span><span class="marker-year">2015</span></div>
+          <div class="episode-content">
+            <span class="episode-badge">EPISODE 03</span>
+            <h3 class="episode-title">Overthinking.exe activated.</h3>
+            <p class="episode-desc">Analysing every text message 47 times.</p>
+          </div>
+        </div>
+
+        <div class="episode-card episode-right">
+          <div class="episode-marker"><span class="marker-dot"></span><span class="marker-year">2020</span></div>
+          <div class="episode-content">
+            <span class="episode-badge">EPISODE 04</span>
+            <h3 class="episode-title">Meme knowledge reached dangerous levels.</h3>
+            <p class="episode-desc">Tagging friends in 100 memes per day.</p>
+          </div>
+        </div>
+
+        <div class="episode-card episode-left">
+          <div class="episode-marker"><span class="marker-dot"></span><span class="marker-year">2024</span></div>
+          <div class="episode-content">
+            <span class="episode-badge">EPISODE 05</span>
+            <h3 class="episode-title">Friendship standards became suspiciously high. 💀</h3>
+            <p class="episode-desc">Only top-tier vibe matches allowed.</p>
+          </div>
+        </div>
+
+        <div class="episode-card episode-right episode-present">
+          <div class="episode-marker"><span class="marker-dot pulse"></span><span class="marker-year gold">2026</span></div>
+          <div class="episode-content gold-card">
+            <span class="episode-badge badge-gold">PRESENT DAY</span>
+            <h3 class="episode-title">Still causing chaos. ⚡</h3>
+            <p class="episode-desc">And apparently... we're not done yet. ❤️</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PART 03: THE MEMORIES & PHOTO ALBUM -->
+    <div class="archives-part part-03-memories">
+      <div class="part-header-badge">
+        <span class="part-num">PART 03</span>
+        <span class="part-title">📸 THE MEMORIES</span>
+      </div>
+      <p class="gallery-subtitle-text">"Some moments are better remembered than explained." ✨</p>
+
+      <!-- PRESERVED CINEMATIC PHOTO GRID -->
+      <div class="cinematic-photo-grid">
+        <div class="photo-card card-hero">
+          <div class="card-image-wrapper">
+            <img src="images/birthday-girl.jpeg" alt="Little Princess" class="grid-img img-hero-card">
+            <div class="card-vignette"></div>
+            <div class="card-light-sweep"></div>
+          </div>
+          <div class="card-caption">
+            <div class="card-tag">2004 • BIRTHDAY HERO</div>
+            <h4>Little Princess 💖</h4>
+          </div>
+        </div>
+
+        <div class="photo-card card-childhood">
+          <div class="card-image-wrapper">
+            <img src="images/Chinni-Childhood.jpeg" alt="Celebration Spotlight" class="grid-img img-childhood-card">
+            <div class="card-vignette"></div>
+            <div class="card-light-sweep"></div>
+          </div>
+          <div class="card-caption">
+            <div class="card-tag">DOCUMENTARY SPOTLIGHT</div>
+            <h4>Celebration Spotlight ✨</h4>
+          </div>
+        </div>
+
+        <div class="photo-card card-regal">
+          <div class="card-image-wrapper">
+            <img src="images/chinni-second.jpg" alt="The Legend Herself" class="grid-img img-regal-card">
+            <div class="card-vignette"></div>
+            <div class="card-light-sweep"></div>
+          </div>
+          <div class="card-caption">
+            <div class="card-tag">CURRENT ERA • QUEEN</div>
+            <h4>The Legend Herself 👑</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="gallery-ending-narrative">
+        <p class="ending-quote">"Three frames. Countless memories."</p>
+      </div>
+
+      <!-- MASTER CTA TO FOUR CLOCKS -->
+      <div class="roast-footer-action">
+        <button id="open-letter-btn" class="open-letter-trigger-btn">
+          ENTER CHINNIII WORLD 🌍 →
+        </button>
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 6
+       PERSONAL LETTER
+       ===================================================== -->
+
+  <section
+    id="letter-section"
+    class="letter-section hidden">
+
+
+    <div class="letter-container">
+
+      <button class="cw-back-to-world-btn" id="letter-back-to-world-btn" aria-label="Back to Chinniii World" style="margin-bottom: 1.5rem;">
+        <span class="back-arrow">←</span>
+        <span class="back-text">BACK TO CHINNIII WORLD</span>
+      </button>
+
+
+      <h2
+        class="letter-section-heading"
+        id="letter-heading">
+
+        💌 One Small Letter For You
+
+      </h2>
+
+
+      <!-- HANDWRITTEN CARD -->
+
+      <div
+        class="handwritten-card"
+        id="handwritten-card">
+
+
+        <div class="paper-stamp">
+          ❤️
+        </div>
+
+
+        <div
+          class="letter-text-body"
+          id="letter-text-body">
+
+
+          <p class="letter-salutation">
+            Dear Chinniii,
+          </p>
+
+
+          <p>
+            Once Again Happy Birthday to my personal entertainment subscription. ❤️😭
+            After all the roasting, memes, and nonsense on this website 😂,
+            I just wanted to say one simple thing.
+          </p>
+
+
+          <p>
+            I'm really glad that you are a part of my life.
+          </p>
+
+
+          <p>
+            You're not just a friend to me.
+            You're one of those people who somehow matches my vibe perfectly —
+            whether we're talking about random things, laughing at stupid memes,
+            or having completely unnecessary conversations.
+          </p>
+
+
+          <p>
+            And honestly, one thing I'll always remember is how supportive you are.
+          </p>
+
+
+          <p>
+
+            Whenever I ask you for something, your answer is basically:
+
+            <br>
+
+            <span class="quote-highlight">
+              'What type do you want? Ask anything, literally.' ❤️
+            </span>
+
+          </p>
+
+
+          <p>
+            That says a lot about you.
+          </p>
+
+
+          <p>
+            You're funny, caring, supportive, and yes...
+            a professional overthinker too. 😂
+          </p>
+
+
+          <p>
+            I hope this year brings you lots of happiness,
+            success, peace, and beautiful memories.
+          </p>
+
+
+          <p>
+            May Mahadev always bless you and guide you. 🕉️
+          </p>
+
+
+          <p>
+            Stay the same crazy Chinniii.
+          </p>
+
+
+          <p class="letter-wishes">
+            Happy Birthday, Varshitha Reddy. ❤️
+          </p>
+
+
+          <p class="letter-signature">
+            — From your vibe-match friend
+          </p>
+
+
+        </div>
+
+      </div>
+
+
+      <!-- ELEGANT FINAL ENDING STATEMENT -->
+      <div class="letter-final-ending-wrapper">
+        <p class="letter-story-end-text">
+          "And that's the little story I wanted you to keep. ❤️"
+        </p>
+        <div class="the-end-badge">THE END</div>
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STAGE 7
+       GRAND CELEBRATION
+       ===================================================== -->
+
+  <section
+    id="grand-celebration"
+    class="grand-celebration hidden">
+
+
+    <!-- CONFETTI -->
+
+    <canvas
+      id="confetti-canvas"
+      class="confetti-canvas">
+    </canvas>
+
+
+    <!-- GLOW -->
+
+    <div
+      class="celebration-glow-flare"
+      aria-hidden="true">
+    </div>
+
+
+    <!-- CELEBRATION CONTENT -->
+
+    <div class="celebration-content">
+
+
+      <!-- CROWN -->
+
+      <div class="birthday-crown-icon">
+        👑✨
+      </div>
+
+
+      <!-- CAKE -->
+      <div class="final-birthday-cake">
+
+        <div class="cake-candle candle-one">
+          🕯️
+        </div>
+
+        <div class="cake-candle candle-two">
+          🕯️
+        </div>
+
+        <div class="cake-candle candle-three">
+          🕯️
+        </div>
+
+        <div class="cake-emoji">
+          🎂
+        </div>
+
+      </div>
+
+
+      <h1 class="grand-birthday-title">
+        HAPPY BIRTHDAY CHINNIII 🎂❤️
+      </h1>
+
+
+      <div class="grand-sub-messages">
+
+        <p class="sub-msg">
+          Stay happy.
+        </p>
+
+        <p class="sub-msg">
+          Stay crazy.
+        </p>
+
+        <p class="sub-msg">
+          Keep being you.
+        </p>
+
+      </div>
+
+
+      <!-- FINAL MESSAGE -->
+
+      <p class="final-love-message">
+        You are truly one of the special people in my life. ❤️
+      </p>
+
+
+      <!-- FINAL ACTION -->
+
+      <div class="final-actions">
+
+        <button
+          id="final-replay-btn"
+          class="final-replay-btn">
+
+          ↻ REPLAY CINEMATIC SURPRISE
+
+        </button>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
