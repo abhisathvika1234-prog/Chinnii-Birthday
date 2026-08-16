@@ -503,6 +503,9 @@ document.addEventListener("DOMContentLoaded", () => {
   let sunMesh;
   let sunCoronaMesh;
 
+  let sunDirectional;
+  let sunPoint;
+
   let starField;
   let nebulaSprites = [];
 
@@ -523,41 +526,109 @@ document.addEventListener("DOMContentLoaded", () => {
   let currentCamLookAt =
     new THREE.Vector3(0, 0, -10);
 
+  const planetPositionsDesktop = {
+    MOON: new THREE.Vector3(-14, -3, 15),
+    VENUS: new THREE.Vector3(-6, 4, 2),
+    SATURN: new THREE.Vector3(16, 5, -25),
+    SUN: new THREE.Vector3(22, -8, -65)
+  };
+
+  const planetPositionsMobile = {
+    MOON: new THREE.Vector3(-2.5, 9, 15),
+    VENUS: new THREE.Vector3(-3, 5, 2),
+    SATURN: new THREE.Vector3(4, 2, -25),
+    SUN: new THREE.Vector3(5, -14, -65)
+  };
+
   const planetPositions = {
+    MOON: new THREE.Vector3(-14, -3, 15),
+    VENUS: new THREE.Vector3(-6, 4, 2),
+    SATURN: new THREE.Vector3(16, 5, -25),
+    SUN: new THREE.Vector3(22, -8, -65)
+  };
 
-    MOON:
-      new THREE.Vector3(-14, -3, 15),
+  const cameraPosMapDesktop = {
+    WIDE: new THREE.Vector3(0, 0, 48),
+    MOON: new THREE.Vector3(-11, -2, 22),
+    VENUS: new THREE.Vector3(-3, 4, 10),
+    SATURN: new THREE.Vector3(11, 5, -14),
+    SUN: new THREE.Vector3(16, -6, -42),
+    FINAL: new THREE.Vector3(0, 0, 95)
+  };
 
-    VENUS:
-      new THREE.Vector3(-6, 4, 2),
-
-    SATURN:
-      new THREE.Vector3(16, 5, -25),
-
-    SUN:
-      new THREE.Vector3(22, -8, -65)
+  const cameraPosMapMobile = {
+    WIDE: new THREE.Vector3(0, 0, 52),
+    MOON: new THREE.Vector3(-2.5, 9, 23),
+    VENUS: new THREE.Vector3(-3, 5, 10),
+    SATURN: new THREE.Vector3(4, 2, -14),
+    SUN: new THREE.Vector3(5, -14, -42),
+    FINAL: new THREE.Vector3(0, 0, 105)
   };
 
   const cameraPosMap = {
-
-    WIDE:
-      new THREE.Vector3(0, 0, 48),
-
-    MOON:
-      new THREE.Vector3(-11, -2, 22),
-
-    VENUS:
-      new THREE.Vector3(-3, 4, 10),
-
-    SATURN:
-      new THREE.Vector3(11, 5, -14),
-
-    SUN:
-      new THREE.Vector3(16, -6, -42),
-
-    FINAL:
-      new THREE.Vector3(0, 0, 95)
+    WIDE: new THREE.Vector3(0, 0, 48),
+    MOON: new THREE.Vector3(-11, -2, 22),
+    VENUS: new THREE.Vector3(-3, 4, 10),
+    SATURN: new THREE.Vector3(11, 5, -14),
+    SUN: new THREE.Vector3(16, -6, -42),
+    FINAL: new THREE.Vector3(0, 0, 95)
   };
+
+  function updateResponsiveUniverse() {
+    if (!renderer || !camera) return;
+
+    const isMobile = window.innerWidth <= 768;
+
+    camera.fov = isMobile ? 60 : 52;
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.75 : 2));
+
+    if (composer) {
+      composer.setSize(window.innerWidth, window.innerHeight);
+    }
+    if (bloomPass && bloomPass.resolution) {
+      bloomPass.resolution.set(window.innerWidth, window.innerHeight);
+    }
+
+    const posConfig = isMobile ? planetPositionsMobile : planetPositionsDesktop;
+    const camConfig = isMobile ? cameraPosMapMobile : cameraPosMapDesktop;
+
+    planetPositions.MOON.copy(posConfig.MOON);
+    planetPositions.VENUS.copy(posConfig.VENUS);
+    planetPositions.SATURN.copy(posConfig.SATURN);
+    planetPositions.SUN.copy(posConfig.SUN);
+
+    cameraPosMap.WIDE.copy(camConfig.WIDE);
+    cameraPosMap.MOON.copy(camConfig.MOON);
+    cameraPosMap.VENUS.copy(camConfig.VENUS);
+    cameraPosMap.SATURN.copy(camConfig.SATURN);
+    cameraPosMap.SUN.copy(camConfig.SUN);
+    cameraPosMap.FINAL.copy(camConfig.FINAL);
+
+    if (sunMesh) sunMesh.position.copy(planetPositions.SUN);
+    if (saturnMesh) saturnMesh.position.copy(planetPositions.SATURN);
+    if (venusMesh) venusMesh.position.copy(planetPositions.VENUS);
+    if (moonMesh) moonMesh.position.copy(planetPositions.MOON);
+
+    if (sunDirectional) sunDirectional.position.copy(planetPositions.SUN);
+    if (sunPoint) sunPoint.position.copy(planetPositions.SUN);
+
+    if (currentStep && cameraPosMap[currentStep]) {
+      targetCamPos.copy(cameraPosMap[currentStep]);
+      if (currentStep === "WIDE") {
+        targetLookAt.set(0, 0, -10);
+      } else if (currentStep === "FINAL") {
+        targetLookAt.set(0, 0, 0);
+      } else if (planetPositions[currentStep]) {
+        targetLookAt.copy(planetPositions[currentStep]);
+      }
+    }
+
+    updateHintBadgePositions();
+  }
 
 
   /* =========================================================================
@@ -1289,7 +1360,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Lighting */
 
-    const sunDirectional =
+    sunDirectional =
       new THREE.DirectionalLight(
         0xfffaea,
         2.2
@@ -1310,7 +1381,7 @@ document.addEventListener("DOMContentLoaded", () => {
       sunDirectional.target
     );
 
-    const sunPoint =
+    sunPoint =
       new THREE.PointLight(
         0xfff0cc,
         3.5,
@@ -1762,6 +1833,7 @@ document.addEventListener("DOMContentLoaded", () => {
       signalMesh
     );
 
+    updateResponsiveUniverse();
 
     animate3DUniverse();
   }
@@ -1882,6 +1954,9 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     ];
 
+    const isMobile = window.innerWidth <= 768;
+    const padding = isMobile ? 12 : 20;
+
     hints.forEach(
       ({ badge, pos }) => {
 
@@ -1899,19 +1974,26 @@ document.addEventListener("DOMContentLoaded", () => {
           camera
         );
 
-        const x =
+        let x =
           (
             projected.x * 0.5 +
             0.5
           ) *
           window.innerWidth;
 
-        const y =
+        let y =
           (
             -projected.y * 0.5 +
             0.5
           ) *
           window.innerHeight;
+
+        if (isMobile) {
+          const badgeWidth = badge.offsetWidth || 160;
+          const halfWidth = badgeWidth / 2;
+          x = Math.max(halfWidth + padding, Math.min(window.innerWidth - halfWidth - padding, x));
+          y = Math.max(50, Math.min(window.innerHeight - 70, y));
+        }
 
         badge.style.left =
           `${x}px`;
@@ -8172,6 +8254,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener(
     "resize",
     () => {
+
+      updateResponsiveUniverse();
 
       if (
         renderer &&
